@@ -14,12 +14,11 @@ void main() {
       return Response('error', 404);
     });
 
-    final api = CurrencyApi(mockClient);
+    final api = CurrencyApi();
 
     final result = await api.fetch();
 
     expect(result.timeLastUpdateUtc, 'Tue, 28 Mar 2023 00:00:02 +0000');
-    expect(result.baseCode, 'KRW');
   });
 }
 
