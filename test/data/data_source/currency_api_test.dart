@@ -15,7 +15,7 @@ void main() {
       return Response('error', 404);
     });
 
-    final api = CurrencyApi();
+    final api = CurrencyApi(client: mockClient);
 
     final result = await api.fetch();
 

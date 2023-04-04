@@ -1,8 +1,13 @@
 import 'dart:convert';
 
 import 'package:currency_info_prac_clone/domain/model/currency.dart';
+import 'package:http/http.dart' as http;
 
 class CurrencyApi {
+  final http.Client _client;
+
+  CurrencyApi({http.Client? client}) : _client = (client ?? http.Client());
+
   Future<Currency> fetch() async {
     Map<String, dynamic> response = jsonDecode(mockCurrencyApi);
     Currency currency = Currency.fromJson(response);
