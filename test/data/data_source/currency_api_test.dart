@@ -7,6 +7,7 @@ void main() {
   test('currency data 를 가져온다', () async {
     const myKey = 'd76de5b5220a9d6ee0184223';
     const url = 'https://v6.exchangerate-api.com/v6/$myKey/latest/KRW';
+
     final mockClient = MockClient((request) async {
       if (request.url.toString() == url) {
         return Response(fakeData, 200);

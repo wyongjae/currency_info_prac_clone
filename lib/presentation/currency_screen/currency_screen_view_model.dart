@@ -6,20 +6,31 @@ import 'package:flutter/material.dart';
 class CurrencyScreenViewModel with ChangeNotifier {
   final CurrencyRepository repository;
 
-  CurrencyState _state = CurrencyState();
+  CurrencyState _state = CurrencyState(
+    firstConversionRate: ConversionRate(),
+    secondConversionRate: ConversionRate(),
+  );
 
   CurrencyState get state => _state;
 
-  List<ConversionRate> get conversionRates =>
-      state.currency!.conversionRates.entries
-          .map((e) => ConversionRate(nation: e.key, rate: e.value))
-          .toList();
+  String get timeLastUpdateUtc => state.currency?.timeLastUpdateUtc ?? '';
+
+  String get timeNextUpdateUtc => state.currency?.timeNextUpdateUtc ?? '';
 
   CurrencyScreenViewModel(this.repository) {
     fetch();
   }
 
   Future<void> fetch() async {
-    await repository.getData();
+    final currency = await repository.getData();
+
+    _state = state.copyWith(
+      currency: currency,
+      conversionRates: currency.conversionRates.entries
+          .map((e) => ConversionRate(nation: e.key, rate: e.value))
+          .toList(),
+    );
+
+    notifyListeners();
   }
 }
