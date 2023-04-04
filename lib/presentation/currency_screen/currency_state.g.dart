@@ -21,6 +21,7 @@ _$_CurrencyState _$$_CurrencyStateFromJson(Map<String, dynamic> json) =>
           json['secondConversionRate'] as Map<String, dynamic>),
       firstMoney: json['firstMoney'] as num? ?? 0,
       secondMoney: json['secondMoney'] as num? ?? 0,
+      money: json['money'] as num? ?? 0,
     );
 
 Map<String, dynamic> _$$_CurrencyStateToJson(_$_CurrencyState instance) =>
@@ -31,4 +32,5 @@ Map<String, dynamic> _$$_CurrencyStateToJson(_$_CurrencyState instance) =>
       'secondConversionRate': instance.secondConversionRate,
       'firstMoney': instance.firstMoney,
       'secondMoney': instance.secondMoney,
+      'money': instance.money,
     };

@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 class CurrencyApi {
   final http.Client _client;
 
+  // 선택 매개변수
   CurrencyApi({http.Client? client}) : _client = (client ?? http.Client());
 
   Future<Currency> fetch() async {

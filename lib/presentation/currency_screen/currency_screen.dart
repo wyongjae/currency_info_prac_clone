@@ -11,6 +11,7 @@ class CurrencyScreen extends StatefulWidget {
 
 class _CurrencyScreenState extends State<CurrencyScreen> {
   final _firstController = TextEditingController();
+  final _secondController = TextEditingController();
 
   @override
   void initState() {
@@ -19,6 +20,13 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
       final viewModel = context.read<CurrencyScreenViewModel>();
       viewModel.fetch();
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _firstController.dispose();
+    _secondController.dispose();
   }
 
   @override
@@ -79,7 +87,10 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                                     state.conversionRates[index];
 
                                 return InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    viewModel.setNation(conversionRates);
+                                    Navigator.pop(context);
+                                  },
                                   child: ListTile(
                                     title: Text(conversionRates.nation),
                                     trailing: Text('${conversionRates.rate}'),
@@ -119,11 +130,103 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                     color: Colors.black45,
                   ),
                 ),
-                child: TextFormField(
+                child: TextField(
                   style: const TextStyle(fontSize: 20),
                   controller: _firstController,
                   keyboardType: TextInputType.number,
-                  onChanged: (text) {},
+                  onChanged: (text) {
+                    viewModel.changeFirstMoney(_firstController.text);
+                  },
+                  decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.all(10),
+                    border: InputBorder.none,
+                    hintText: '금액을 입력하세요',
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 150,
+                height: 55,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.black45,
+                  ),
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          content: SizedBox(
+                            height: 400,
+                            width: double.maxFinite,
+                            child: ListView.builder(
+                              itemBuilder: (context, index) {
+                                final conversionRates =
+                                    state.conversionRates[index];
+
+                                return InkWell(
+                                  onTap: () {
+                                    viewModel.setNation2(conversionRates);
+                                    Navigator.pop(context);
+                                  },
+                                  child: ListTile(
+                                    title: Text(conversionRates.nation),
+                                    trailing: Text('${conversionRates.rate}'),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero),
+                    elevation: 0.0,
+                    backgroundColor: Colors.white12,
+                    foregroundColor: Colors.black87,
+                  ),
+                  child: Text(
+                    viewModel.state.secondConversionRate.nation,
+                    style: const TextStyle(
+                      fontSize: 28,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Container(
+                width: 200,
+                height: 55,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.black45,
+                  ),
+                ),
+                child: TextField(
+                  style: const TextStyle(fontSize: 20),
+                  controller: _secondController,
+                  keyboardType: TextInputType.number,
+                  onChanged: (text) {
+                    viewModel.changeSecondMoney(_secondController.text);
+                  },
                   decoration: const InputDecoration(
                     contentPadding: EdgeInsets.all(10),
                     border: InputBorder.none,

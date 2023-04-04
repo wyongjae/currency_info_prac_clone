@@ -33,4 +33,40 @@ class CurrencyScreenViewModel with ChangeNotifier {
 
     notifyListeners();
   }
+
+  void setNation(ConversionRate conversionRate) {
+    _state = state.copyWith(
+      firstConversionRate: conversionRate,
+    );
+    notifyListeners();
+  }
+
+  void setNation2(ConversionRate conversionRate) {
+    _state = state.copyWith(
+      secondConversionRate: conversionRate,
+    );
+    notifyListeners();
+  }
+
+  void changeFirstMoney(String text) {
+    num money = num.parse(text);
+
+    _state = state.copyWith(
+      money: money,
+      secondMoney: money *
+          (state.secondConversionRate.rate / state.firstConversionRate.rate),
+    );
+    notifyListeners();
+  }
+
+  void changeSecondMoney(String text) {
+    num money = num.parse(text);
+
+    _state = state.copyWith(
+      money: money,
+      firstMoney: money *
+          (state.secondConversionRate.rate / state.firstConversionRate.rate),
+    );
+    notifyListeners();
+  }
 }

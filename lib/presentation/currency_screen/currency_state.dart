@@ -15,6 +15,7 @@ class CurrencyState with _$CurrencyState {
     required ConversionRate secondConversionRate,
     @Default(0) num firstMoney,
     @Default(0) num secondMoney,
+    @Default(0) num money,
   }) = _CurrencyState;
 
   factory CurrencyState.fromJson(Map<String, dynamic> json) =>

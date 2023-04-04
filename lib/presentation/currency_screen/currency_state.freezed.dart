@@ -21,20 +21,15 @@ CurrencyState _$CurrencyStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CurrencyState {
   Currency? get currency => throw _privateConstructorUsedError;
-
   List<ConversionRate> get conversionRates =>
       throw _privateConstructorUsedError;
-
   ConversionRate get firstConversionRate => throw _privateConstructorUsedError;
-
   ConversionRate get secondConversionRate => throw _privateConstructorUsedError;
-
   num get firstMoney => throw _privateConstructorUsedError;
-
   num get secondMoney => throw _privateConstructorUsedError;
+  num get money => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $CurrencyStateCopyWith<CurrencyState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -45,7 +40,6 @@ abstract class $CurrencyStateCopyWith<$Res> {
   factory $CurrencyStateCopyWith(
           CurrencyState value, $Res Function(CurrencyState) then) =
       _$CurrencyStateCopyWithImpl<$Res, CurrencyState>;
-
   @useResult
   $Res call(
       {Currency? currency,
@@ -53,12 +47,11 @@ abstract class $CurrencyStateCopyWith<$Res> {
       ConversionRate firstConversionRate,
       ConversionRate secondConversionRate,
       num firstMoney,
-      num secondMoney});
+      num secondMoney,
+      num money});
 
   $CurrencyCopyWith<$Res>? get currency;
-
   $ConversionRateCopyWith<$Res> get firstConversionRate;
-
   $ConversionRateCopyWith<$Res> get secondConversionRate;
 }
 
@@ -69,7 +62,6 @@ class _$CurrencyStateCopyWithImpl<$Res, $Val extends CurrencyState>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -82,6 +74,7 @@ class _$CurrencyStateCopyWithImpl<$Res, $Val extends CurrencyState>
     Object? secondConversionRate = null,
     Object? firstMoney = null,
     Object? secondMoney = null,
+    Object? money = null,
   }) {
     return _then(_value.copyWith(
       currency: freezed == currency
@@ -107,6 +100,10 @@ class _$CurrencyStateCopyWithImpl<$Res, $Val extends CurrencyState>
       secondMoney: null == secondMoney
           ? _value.secondMoney
           : secondMoney // ignore: cast_nullable_to_non_nullable
+              as num,
+      money: null == money
+          ? _value.money
+          : money // ignore: cast_nullable_to_non_nullable
               as num,
     ) as $Val);
   }
@@ -146,7 +143,6 @@ abstract class _$$_CurrencyStateCopyWith<$Res>
   factory _$$_CurrencyStateCopyWith(
           _$_CurrencyState value, $Res Function(_$_CurrencyState) then) =
       __$$_CurrencyStateCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -155,14 +151,13 @@ abstract class _$$_CurrencyStateCopyWith<$Res>
       ConversionRate firstConversionRate,
       ConversionRate secondConversionRate,
       num firstMoney,
-      num secondMoney});
+      num secondMoney,
+      num money});
 
   @override
   $CurrencyCopyWith<$Res>? get currency;
-
   @override
   $ConversionRateCopyWith<$Res> get firstConversionRate;
-
   @override
   $ConversionRateCopyWith<$Res> get secondConversionRate;
 }
@@ -184,6 +179,7 @@ class __$$_CurrencyStateCopyWithImpl<$Res>
     Object? secondConversionRate = null,
     Object? firstMoney = null,
     Object? secondMoney = null,
+    Object? money = null,
   }) {
     return _then(_$_CurrencyState(
       currency: freezed == currency
@@ -210,6 +206,10 @@ class __$$_CurrencyStateCopyWithImpl<$Res>
           ? _value.secondMoney
           : secondMoney // ignore: cast_nullable_to_non_nullable
               as num,
+      money: null == money
+          ? _value.money
+          : money // ignore: cast_nullable_to_non_nullable
+              as num,
     ));
   }
 }
@@ -223,7 +223,8 @@ class _$_CurrencyState implements _CurrencyState {
       required this.firstConversionRate,
       required this.secondConversionRate,
       this.firstMoney = 0,
-      this.secondMoney = 0})
+      this.secondMoney = 0,
+      this.money = 0})
       : _conversionRates = conversionRates;
 
   factory _$_CurrencyState.fromJson(Map<String, dynamic> json) =>
@@ -232,7 +233,6 @@ class _$_CurrencyState implements _CurrencyState {
   @override
   final Currency? currency;
   final List<ConversionRate> _conversionRates;
-
   @override
   @JsonKey()
   List<ConversionRate> get conversionRates {
@@ -251,10 +251,13 @@ class _$_CurrencyState implements _CurrencyState {
   @override
   @JsonKey()
   final num secondMoney;
+  @override
+  @JsonKey()
+  final num money;
 
   @override
   String toString() {
-    return 'CurrencyState(currency: $currency, conversionRates: $conversionRates, firstConversionRate: $firstConversionRate, secondConversionRate: $secondConversionRate, firstMoney: $firstMoney, secondMoney: $secondMoney)';
+    return 'CurrencyState(currency: $currency, conversionRates: $conversionRates, firstConversionRate: $firstConversionRate, secondConversionRate: $secondConversionRate, firstMoney: $firstMoney, secondMoney: $secondMoney, money: $money)';
   }
 
   @override
@@ -273,7 +276,8 @@ class _$_CurrencyState implements _CurrencyState {
             (identical(other.firstMoney, firstMoney) ||
                 other.firstMoney == firstMoney) &&
             (identical(other.secondMoney, secondMoney) ||
-                other.secondMoney == secondMoney));
+                other.secondMoney == secondMoney) &&
+            (identical(other.money, money) || other.money == money));
   }
 
   @JsonKey(ignore: true)
@@ -285,7 +289,8 @@ class _$_CurrencyState implements _CurrencyState {
       firstConversionRate,
       secondConversionRate,
       firstMoney,
-      secondMoney);
+      secondMoney,
+      money);
 
   @JsonKey(ignore: true)
   @override
@@ -308,29 +313,26 @@ abstract class _CurrencyState implements CurrencyState {
       required final ConversionRate firstConversionRate,
       required final ConversionRate secondConversionRate,
       final num firstMoney,
-      final num secondMoney}) = _$_CurrencyState;
+      final num secondMoney,
+      final num money}) = _$_CurrencyState;
 
   factory _CurrencyState.fromJson(Map<String, dynamic> json) =
       _$_CurrencyState.fromJson;
 
   @override
   Currency? get currency;
-
   @override
   List<ConversionRate> get conversionRates;
-
   @override
   ConversionRate get firstConversionRate;
-
   @override
   ConversionRate get secondConversionRate;
-
   @override
   num get firstMoney;
-
   @override
   num get secondMoney;
-
+  @override
+  num get money;
   @override
   @JsonKey(ignore: true)
   _$$_CurrencyStateCopyWith<_$_CurrencyState> get copyWith =>
